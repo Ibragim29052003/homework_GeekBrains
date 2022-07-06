@@ -1,0 +1,41 @@
+
+import UIKit
+import CoreFoundation
+let a = 10 //катет
+let g = 3 //катет
+let s = ((a * g) / 2) // ПЛОЩАДЬ
+
+
+var b = 0
+let o = a * a
+let r = g * g
+let j = o + r
+func count (j: Int) -> Int{
+        if j == 1 {return 1}
+
+        for i in 0 ... j{
+            if i * i > j{
+                return i - 1
+            }
+        }
+        return 0
+    }
+    b = count(j: j)
+let p = b + a + g // ПЕРИМЕТР
+
+
+let l = ((a * a) + (g * g))
+
+func count (l: Int) -> Int{
+    if l == 1 {return 1}
+
+    for i in 0 ... l{
+        if i * i > l{
+            return i - 1
+        }
+    }
+    return 0
+}
+b = count(l: l)
+let v = b // ГИПОТЕНУЗА
+

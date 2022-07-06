@@ -1,0 +1,38 @@
+import UIKit
+import CoreFoundation
+import Foundation
+let a = -1
+let b = 7
+let c = 9
+let k = b * b
+let r = (4 * a * c)
+var s = 0
+var D: Int? = nil
+D = k - r
+if D! < 0 {
+   print("нет действительных корней")
+} else if D == 0 {
+    let x = ( -Int(b) / (2 * a))
+    print(x)
+} else {
+
+    func count (D: Int) -> Int{
+        if D == 1 {return 1}
+
+        for i in 0 ... D{
+            if i * i > D{
+                return i - 1
+            }
+        }
+        return 0
+    }
+    s = count(D: D!)
+
+}
+
+let w = -b - s
+let q = 2 * a
+let x1 = w / q
+let m = -b + s
+let n = 2 * a
+let x2 = m / n
