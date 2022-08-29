@@ -1,0 +1,72 @@
+
+import UIKit
+
+struct  Queue<T>{
+    var array: [T] = []
+    var peek: T?{
+        return array.first
+    }
+    mutating func inQueue(_ element: T){ //положить элемент
+        array.append(element)
+    }
+    mutating func outQueue() -> T?{ //убрать  элемент
+        return array.isEmpty ? nil : array.removeFirst()
+    }
+    
+    func map(_ transform:  (T) throws -> T) rethrows -> [T]{
+        var transformArrayMap: [T] = []
+        for element in array{
+            let transformElementMap = try transform(element)
+            transformArrayMap.append(transformElementMap)
+        }
+        return transformArrayMap
+    }
+    
+    func filter(_ checkForCompletion: (T) throws  -> T) rethrows  -> [T]{
+        var transformArrayFilter: [T] = []
+        for element in array{
+            let transformElementFilter =  try checkForCompletion(element)
+            transformArrayFilter.append(transformElementFilter)
+        }
+          return transformArrayFilter
+    }
+    
+    
+    subscript(index: Int) -> T?{
+        guard !array.isEmpty, index >= 0, index < array.count else{
+            return nil
+        }
+        return array[index]
+    }
+    
+    
+}
+
+var queue = Queue<Int>()
+
+queue.inQueue(1)
+queue.inQueue(2)
+queue.inQueue(12)
+queue.inQueue(6)
+queue.inQueue(72)
+queue[0]
+queue[2]
+queue[5]
+
+let resultMap = queue.map{$0 % 2 }
+resultMap
+
+var resultFilter = queue.array.filter{$0 % 10 == 2}
+resultFilter
+
+queue.peek
+queue.outQueue()
+
+queue.outQueue()
+queue.outQueue()
+queue.outQueue()
+queue.outQueue()
+queue.peek
+queue.outQueue()
+
+
