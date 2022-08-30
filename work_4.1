@@ -1,0 +1,178 @@
+//
+//  main.swift
+//  homeWork_4
+//
+//  Created by MacBook   on 17.07.2022.
+//
+import Foundation
+let sportcar = SportCar(window: true, door: true, engine: true, nitro: true, sportCarModel: "LADA Priora",bunker: true)
+print(sportcar.sportmakeAction(.fullBunker))
+print(sportcar.makeAction(.actionEngine))
+
+let truckcar = TruckCar(window: true, door: true, engine: true, powerful: false, TruckCarModel: "Thor24", heavy: false)
+print(truckcar.truckmakeAction(.powerfulEngine))
+print(truckcar.makeAction(.actionWindow))
+
+
+//
+//  Car.swift
+//  homeWork_4
+//
+//  Created by MacBook   on 17.07.2022.
+//
+
+
+
+import Foundation
+enum Action {
+    case actionWindow
+    case actionDoor
+    case actionEngine
+}
+class Car {
+
+    var window: Bool
+    var door: Bool
+    var engine: Bool
+     init(window: Bool , door: Bool , engine: Bool) { 
+        self.window = window
+        self.door = door
+        self.engine = engine
+    }
+    func makeAction(_ action:  Action) -> String{
+        return ""
+        
+    }
+    
+}
+
+
+
+
+//
+//  SportCar.swift
+//  homeWork_4
+//
+//  Created by MacBook   on 17.07.2022.
+//
+
+import Foundation
+enum ActionSportCar{
+    case actionNitro
+    case fullBunker
+}
+class SportCar: Car {
+    let nitro: Bool
+    let sportCarModel: String  // модель авто
+    let bunker: Bool
+    init(window: Bool, door: Bool, engine: Bool , nitro: Bool , sportCarModel: String, bunker: Bool) {
+        self.nitro = nitro
+        self.sportCarModel = sportCarModel
+        self.bunker = bunker
+        super.init(window: window, door: door, engine: engine)
+    }
+    
+    override func makeAction(_ action:  Action) -> String{
+        switch action {
+        case .actionWindow:
+            if window == true{
+                return "Открывается окно SportCar"
+                                }  else {
+                                    return "Закрывается окно SportCar"
+                                }
+        case .actionDoor:
+            if door == true{
+                return "Открывается дверь SportCar"
+                           }  else {
+                               return "Закрывается дверь SportCar"
+                           }
+        case .actionEngine:
+            if engine == true{
+                return "Запускается двигатель SportCar"
+                         }  else {
+                             return "Глушится двигатель SportCar"
+                         }
+        }
+    }
+    func sportmakeAction (_ actionSportCar: ActionSportCar ) -> String{
+        switch actionSportCar {
+    case .actionNitro:
+        if nitro == true{
+            return "Включается нитро SportCar"
+        } else {
+            return "Выключается нитро SportCar"
+        }
+        case .fullBunker:
+            if bunker == true{
+                return "\(sportCarModel) в полном бункере"
+            } else{
+                return "\(sportCarModel) без бункера"
+            }
+    }
+    }
+}
+
+
+
+
+//
+//  TruckCar.swift
+//  homeWork_4
+//
+//  Created by MacBook   on 17.07.2022.
+//
+import Foundation
+enum ActionTruckCar{
+    case powerfulEngine
+    case heavyTrailer
+}
+class TruckCar: Car {
+    let powerful: Bool
+    let TruckCarModel: String  // модель авто
+    let heavy: Bool
+    init(window: Bool, door: Bool, engine: Bool , powerful: Bool , TruckCarModel: String, heavy: Bool) {
+        self.powerful = powerful
+        self.TruckCarModel = TruckCarModel
+        self.heavy = heavy
+        super.init(window: window, door: door, engine: engine)
+    }
+    
+    override func makeAction(_ action:  Action) -> String{
+        switch action {
+        case .actionWindow:
+            if window == true{
+                return "Открывается окно TruckCar"
+                                }  else {
+                                    return "Закрывается окно TruckCar"
+                                }
+        case .actionDoor:
+            if door == true{
+                return "Открывается дверь TruckCar"
+                           }  else {
+                               return "Закрывается дверь TruckCar"
+                           }
+        case .actionEngine:
+            if engine == true{
+                return "Запускается двигатель TruckCar"
+                         }  else {
+                             return "Глушится двигатель TruckCar"
+                         }
+        }
+    }
+    func truckmakeAction (_ actionTruckCar: ActionTruckCar ) -> String{
+        switch actionTruckCar {
+    case .powerfulEngine:
+        if powerful == true{
+            return "Включается второй , 13,9-литровый дизельный двигатель V-12 Detroit TruckCar"
+        } else {
+            return "Выключается второй , 13,9-литровый дизельный двигатель V-12 Detroit TruckCar"
+        }
+        case .heavyTrailer:
+            if heavy == true{
+                return "Прицеп прикреплен к TruckCar"
+            } else{
+                return "Прицеп не прикреплен к TruckCar"
+            }
+    }
+    }
+}

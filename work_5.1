@@ -1,0 +1,170 @@
+//main
+
+import Foundation
+
+
+let sportcar = SportCar(nitro: false, bunker: true, sportCarModel: "BMW", window: true, door: true, engine: false)
+print(sportcar.sportmakeAction(.actionNitro))
+print(sportcar.makeAction(.actionEngine))
+ 
+
+let truckcar = TruckCar(window: true, door: false, engine: true, powerful: true, truckCarModel: "Thor24", heavy: false)
+print(truckcar.truckmakeAction(.heavyTrailer))
+print(truckcar.makeAction(.actionDoor))
+
+
+print(sportcar)
+print(truckcar)
+
+// car 
+
+import Foundation
+
+enum Action{
+    case actionWindow
+    case actionDoor
+    case actionEngine
+}
+
+
+
+protocol Car: AnyObject{ // только для классов
+    var window: Bool{get set}
+    var door: Bool{get set}
+    var engine: Bool{get set}
+
+    func makeAction(_ action : Action) -> String
+}
+
+extension Car{
+    func makeAction(_ action: Action) -> String{
+        switch action {
+        case .actionWindow:
+            if window == true{
+                return "Открывается окно "
+                                }  else {
+                                    return "Закрывается окно "
+                                }
+        case .actionDoor:
+            if door == true{
+                return "Открывается дверь "
+                           }  else {
+                               return "Закрывается дверь "
+                           }
+        case .actionEngine:
+            if engine == true{
+                return "Запускается двигатель "
+                         }  else {
+                             return "Глушится двигатель "
+                         }
+        }
+    }
+}
+ 
+
+ // sportCar
+
+
+import Foundation
+
+
+enum ActionSportCar{
+    case actionNitro
+    case actionBunker
+}
+
+class SportCar: Car{
+    var window: Bool
+    var door: Bool
+    var engine: Bool
+    let nitro: Bool
+    let bunker: Bool
+    let sportCarModel: String
+    init(nitro: Bool, bunker: Bool , sportCarModel: String  , window: Bool , door: Bool , engine: Bool){
+        self.nitro = nitro
+        self.bunker = bunker
+        self.sportCarModel = sportCarModel
+        self.window = window
+        self.door = door
+        self.engine = engine
+    }
+    func sportmakeAction (_ actionSportCar: ActionSportCar ) -> String{
+        switch actionSportCar {
+    case .actionNitro:
+        if nitro == true{
+            return "Включается нитро у \(sportCarModel)"
+        } else {
+            return "Выключается нитро у \(sportCarModel)"
+        }
+        case .actionBunker:
+            if bunker == true{
+                return "\(sportCarModel) в полном бункере "
+            } else{
+                return "\(sportCarModel) без бункера "
+            }
+    }
+    
+
+}
+
+
+}
+
+extension SportCar: CustomStringConvertible{
+    var description: String {
+      return "модель спорткара - \(sportCarModel)"
+        }
+    }
+    
+//truckCar
+
+
+import Foundation
+
+
+enum ActionTruckCar{
+    case powerfulEngine
+    case heavyTrailer
+}
+class TruckCar: Car {
+    var window: Bool
+    var door: Bool
+    var engine: Bool
+    let powerful: Bool
+    let truckCarModel: String  // модель авто
+    let heavy: Bool
+    init(window: Bool, door: Bool, engine: Bool , powerful: Bool , truckCarModel: String, heavy: Bool) {
+        self.heavy = heavy
+        self.truckCarModel = truckCarModel
+        self.powerful = powerful
+        self.window = window
+        self.door = door
+        self.engine = engine
+    }
+   
+      func truckmakeAction (_ actionTruckCar: ActionTruckCar ) -> String{
+        switch actionTruckCar {
+        case .powerfulEngine:
+            if powerful == true{
+                return "Включается второй , 13,9-литровый дизельный двигатель V-12 Detroit у \(truckCarModel)"
+            } else {
+                return "Выключается второй , 13,9-литровый дизельный двигатель V-12 Detroit у \(truckCarModel)"
+            }
+            case .heavyTrailer:
+                if heavy == true{
+                    return "Прицеп прикреплен к \(truckCarModel)"
+                } else{
+                    return "Прицеп не прикреплен к \(truckCarModel)"
+                }
+        }}
+    }
+extension TruckCar: CustomStringConvertible{
+    var description: String {
+      return "модель траккара - \(truckCarModel)"
+        }
+    }
+    
+    
+
+
+

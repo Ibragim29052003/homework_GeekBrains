@@ -1,0 +1,22 @@
+import UIKit
+import Foundation
+
+let n = 100
+var p = 2
+extension Int {
+    func aa() -> Int {
+        return p + p
+    }
+}
+var a = [Int](2...n).map{$0}
+while (p.aa() <= n) {
+    a.removeAll(where: {$0 >= p.aa() && $0.isMultiple(of: p)})
+    p = a.first(where: {$0 > p})!
+    while a.contains(where: {$0 > p.aa()}){
+    a.removeAll(where: {$0.isMultiple(of: p)})
+    p = a.first(where: {$0 > p})!
+}
+
+
+}
+print(a)

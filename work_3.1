@@ -1,0 +1,142 @@
+import UIKit
+import Foundation
+enum Action {
+    case sportRunEngine
+    case sportOpenOrCloseWindow
+    case sportOpenOrCloseDoor
+    case fillOrDisembarkTrunck(fillOrDisembark: Int  , fillOrDisembark_bool: Bool)
+    
+}
+struct SportCar{
+    let sportCarModel: String // модель авто
+    let sportYearRelease: Int // год релиза
+    let sportTrunkVolume: Int //объем  багажника
+    var sportWindow: Bool // открывать/закрывать окно
+    var sportDoor: Bool
+    var sportEngine: Bool
+//    var makeAction_1: Action
+    var sportCurrentTrunkVolume: Int // текущий  объем багажника
+    init(sportCarModel: String , sportYearRelease: Int , sportTrunkVolume: Int ,  sportWindow: Bool ,  sportDoor: Bool , sportCurrentTrunkVolume: Int , sportEngine: Bool ){
+        self.sportCarModel = sportCarModel
+        self.sportYearRelease = sportYearRelease
+        self.sportTrunkVolume = sportTrunkVolume
+        self.sportWindow = sportWindow
+        self.sportDoor  = sportDoor
+        self.sportEngine = sportEngine
+//       self.makeAction_1 = .sportRunEngine(engine: true)
+        self.sportCurrentTrunkVolume = sportCurrentTrunkVolume
+    }
+        mutating func makeAction1(_ action: Action){
+            switch action{
+            case .sportOpenOrCloseDoor:
+                if sportDoor == true{
+                    print("Открывается дверь SportCar")
+                }  else {
+                    print("Закрывается дверь SportCar")
+                }
+            case .sportOpenOrCloseWindow:
+                if sportWindow == true{
+                    print("Открывается окно SportCar")
+                }  else {
+                    print("Закрывается окно SportCar")
+                }
+            case .sportRunEngine :
+                if sportEngine == true{
+                    print("Запускается двигатель SportCar")
+                }  else {
+                    print("Глушится двигатель SportCar")
+                }
+            case .fillOrDisembarkTrunck(let fillOrDisembark, fillOrDisembark_bool: true):
+                if sportCurrentTrunkVolume + fillOrDisembark <= sportTrunkVolume{
+                    sportCurrentTrunkVolume += fillOrDisembark
+                } else{
+                    print("нельзя положить груз  SportCar")
+                }
+
+            case .fillOrDisembarkTrunck(let fillOrDisembark, fillOrDisembark_bool: false):
+                if (sportCurrentTrunkVolume - fillOrDisembark) >= 0 && (sportCurrentTrunkVolume - fillOrDisembark) <= sportTrunkVolume {
+                    sportCurrentTrunkVolume -= fillOrDisembark
+                } else{
+                    print("нельзя убрать груз SportCar")
+                }
+            }
+     }
+}
+var sportCar = SportCar(sportCarModel: "McLaren 765LT", sportYearRelease: 2022, sportTrunkVolume: 150, sportWindow: false, sportDoor: false, sportCurrentTrunkVolume: 0, sportEngine: false)
+
+
+sportCar.makeAction1(.sportOpenOrCloseDoor)
+sportCar.makeAction1(.sportRunEngine)
+sportCar.makeAction1(.sportOpenOrCloseWindow)
+sportCar.makeAction1(.fillOrDisembarkTrunck(fillOrDisembark: 23, fillOrDisembark_bool: true))
+sportCar.sportCurrentTrunkVolume
+sportCar.makeAction1(.fillOrDisembarkTrunck(fillOrDisembark: 23, fillOrDisembark_bool: false))
+sportCar.sportCurrentTrunkVolume
+
+
+
+enum ActionTruck {
+    case truckRunEngine
+    case truckOpenOrCloseWindow
+    case truckOpenOrCloseDoor
+    case fillOrDisembarkTrunckTruck(fillOrDisembarkTruck: Int  , fillOrDisembark_boolTruck: Bool)
+    
+}
+struct TruckCar{
+    let truckCarModel: String // модель авто
+    let truckYearRelease: Int // год релиза
+    let truckTrunkVolume: Int //объем  багажника
+    var truckWindow: Bool // открывать/закрывать окно
+    var truckDoor: Bool
+    var truckEngine: Bool
+    var truckCurrentTrunkVolume: Int // текущий  объем багажника
+    init(truckCarModel: String , truckYearRelease: Int , truckTrunkVolume: Int ,  truckWindow: Bool ,  truckDoor: Bool , truckCurrentTrunkVolume: Int , truckEngine: Bool ){
+        self.truckCarModel = truckCarModel
+        self.truckYearRelease = truckYearRelease
+        self.truckTrunkVolume = truckTrunkVolume
+        self.truckWindow = truckWindow
+        self.truckDoor  = truckDoor
+        self.truckEngine = truckEngine
+        self.truckCurrentTrunkVolume = truckCurrentTrunkVolume
+    }
+        mutating func makeAction1Truck(_ actionTruck: ActionTruck){
+            switch actionTruck{
+            case .truckOpenOrCloseDoor:
+                if truckDoor == true{
+                    print("Открывается дверь TruckCar")
+                }  else {
+                    print("Закрывается дверь TruckCar")
+                }
+            case .truckOpenOrCloseWindow:
+                if truckWindow == true{
+                    print("Открывается окно TruckCar")
+                }  else {
+                    print("Закрывается окно TruckCar")
+                }
+            case .truckRunEngine :
+                if truckEngine == true{
+                    print("Запускается двигатель TruckCar")
+                }  else {
+                    print("Глушится двигатель TruckCar")
+                }
+            case .fillOrDisembarkTrunckTruck(let fillOrDisembarkTruck, fillOrDisembark_boolTruck: true):
+                if truckCurrentTrunkVolume + fillOrDisembarkTruck <= truckTrunkVolume{
+                    truckCurrentTrunkVolume += fillOrDisembarkTruck
+                } else{
+                    print("нельзя положить груз TruckCar")
+                }
+
+            case .fillOrDisembarkTrunckTruck(let fillOrDisembarkTruck, fillOrDisembark_boolTruck: false):
+                if (truckCurrentTrunkVolume - fillOrDisembarkTruck) >= 0 && (truckCurrentTrunkVolume - fillOrDisembarkTruck) <= truckTrunkVolume {
+                    truckCurrentTrunkVolume -= fillOrDisembarkTruck
+                } else{
+                    print("нельзя убрать груз TruckCar")
+                }
+            }
+     }
+}
+var truckCar =  TruckCar(truckCarModel: "THOR 24", truckYearRelease: 2022, truckTrunkVolume: 15000, truckWindow: false, truckDoor: false, truckCurrentTrunkVolume: 0, truckEngine: true)
+
+truckCar.makeAction1Truck(.fillOrDisembarkTrunckTruck(fillOrDisembarkTruck: 10000, fillOrDisembark_boolTruck: true))
+truckCar.truckCurrentTrunkVolume
+truckCar.makeAction1Truck(.truckRunEngine)

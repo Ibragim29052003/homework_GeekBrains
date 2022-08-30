@@ -1,0 +1,20 @@
+import UIKit
+import Foundation
+var a = [Int]()
+func new(i: Int) {
+    if i == 0 || i == 1{
+        a.append(0)
+        a.append(1)
+    }
+    var q: Int = 0
+    var w: Int = 1
+    for _ in 2 ... 51{
+
+        let g: Int = q + w
+        q = w
+        w = g
+        a.append(g)
+    }
+}
+new(i: 2)
+a
