@@ -1,0 +1,101 @@
+import Foundation
+
+
+enum sparePartsCategoryError : LocalizedError{ //ошибка категории запчасти
+    case wrongInputCategory
+    case nameSparePartsEmpty
+    case notSrting
+    var errorDescription: String?{
+        switch self {
+        case .wrongInputCategory:
+            return "Неверное имя запчасти!"
+        case .nameSparePartsEmpty:
+            return "Имя запчасти не указано!"
+        case  .notSrting:
+            return "Введена не строка!"
+        }
+    }
+}
+
+enum sparePartsNumberError : LocalizedError{ //ошибка в номере запчасти
+    case wrongInputNumber
+    case numberSparePartsEmty
+    case notInteger
+    var errorDescription: String?{
+        switch self {
+        case .wrongInputNumber:
+            return "Неверный номер запчасти!"
+        case .numberSparePartsEmty:
+            return "Номер запчасти не указан!"
+        case .notInteger:
+            return "Введено не число"
+        }
+    }
+    
+    
+}
+
+
+
+
+
+func sparePartsCategory() throws -> String{
+    
+    guard let sparePartsC = readLine() else{
+        throw sparePartsCategoryError.wrongInputCategory
+    }
+    guard !sparePartsC.isEmpty else{
+        throw sparePartsCategoryError.nameSparePartsEmpty
+    }
+    
+    guard let space = String?(sparePartsC) else{
+        throw sparePartsCategoryError.notSrting
+    }
+    return space
+    }
+
+
+
+
+
+
+func  sparePartsNumber() throws -> Int{
+    
+    guard let sparePartsN = readLine() else{
+        throw sparePartsNumberError.wrongInputNumber
+    }
+    guard !sparePartsN.isEmpty else{
+        throw sparePartsNumberError.numberSparePartsEmty
+    }
+    guard let spareParts = Int(sparePartsN) else{
+        throw  sparePartsNumberError.notInteger
+    }
+    
+    return spareParts
+}
+
+
+
+func sparePartsNumCat() throws{
+    let sparePartsCat = try sparePartsCategory()
+    let sparePartsNum  = try sparePartsNumber()
+    print("Категория \( sparePartsCat) , номер \( sparePartsNum)")
+}
+
+
+do{
+    try sparePartsNumCat()
+} catch(let sparePartCat){
+    print(sparePartCat.localizedDescription)
+}
+
+
+
+do{
+    try sparePartsNumCat()
+} catch(let sparePartNum){
+    print(sparePartNum.localizedDescription)
+}
+
+
+
