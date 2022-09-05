@@ -1,22 +1,64 @@
 import Foundation
 
+//  1 Задание
+
+func name () throws -> String?{
+    guard let name = readLine() else{
+         return "Неверный ввод имени!"
+        }
+    guard !name.isEmpty else {
+        return "Имя не введено!"
+    }
+    return name
+}
+
+func age () throws -> String?{
+    guard let age = readLine()  else{
+        return "Неверный ввод возраста!"
+    }
+    guard !age.isEmpty else {
+        return "Возраст не введен!"
+    }
+    guard let age_1 = Int(age) else {
+        return "Введено не число!"
+    }
+    return String(age_1)
+}
+
+func ageName() throws{
+    guard let name = try name() else {return}
+    guard let age = try age() else {return}
+    print("Имя: \(name), возраст:  \(age) ")
+
+}
+
+   func foo(){
+do{
+    try ageName()
+} catch{
+    print(error.localizedDescription)
+}
+
+
+}
+foo()
+
+//  2 Задание
+
+
 
 enum sparePartsCategoryError : LocalizedError{ //ошибка категории запчасти
     case wrongInputCategory
     case nameSparePartsEmpty
-    case notSrting
     var errorDescription: String?{
         switch self {
         case .wrongInputCategory:
             return "Неверное имя запчасти!"
         case .nameSparePartsEmpty:
             return "Имя запчасти не указано!"
-        case  .notSrting:
-            return "Введена не строка!"
-        }
     }
 }
-
+}
 enum sparePartsNumberError : LocalizedError{ //ошибка в номере запчасти
     case wrongInputNumber
     case numberSparePartsEmty
@@ -31,8 +73,8 @@ enum sparePartsNumberError : LocalizedError{ //ошибка в номере за
             return "Введено не число"
         }
     }
-    
-    
+
+
 }
 
 
@@ -40,19 +82,15 @@ enum sparePartsNumberError : LocalizedError{ //ошибка в номере за
 
 
 func sparePartsCategory() throws -> String{
-    
+
     guard let sparePartsC = readLine() else{
         throw sparePartsCategoryError.wrongInputCategory
     }
     guard !sparePartsC.isEmpty else{
         throw sparePartsCategoryError.nameSparePartsEmpty
     }
-    
-    guard let space = String?(sparePartsC) else{
-        throw sparePartsCategoryError.notSrting
-    }
-    return space
-    }
+    return sparePartsC
+}
 
 
 
@@ -60,7 +98,7 @@ func sparePartsCategory() throws -> String{
 
 
 func  sparePartsNumber() throws -> Int{
-    
+
     guard let sparePartsN = readLine() else{
         throw sparePartsNumberError.wrongInputNumber
     }
@@ -70,7 +108,7 @@ func  sparePartsNumber() throws -> Int{
     guard let spareParts = Int(sparePartsN) else{
         throw  sparePartsNumberError.notInteger
     }
-    
+
     return spareParts
 }
 
@@ -82,7 +120,7 @@ func sparePartsNumCat() throws{
     print("Категория \( sparePartsCat) , номер \( sparePartsNum)")
 }
 
-
+//func foo(){
 do{
     try sparePartsNumCat()
 } catch(let sparePartCat){
@@ -96,6 +134,4 @@ do{
 } catch(let sparePartNum){
     print(sparePartNum.localizedDescription)
 }
-
-
 
